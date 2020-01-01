@@ -21,7 +21,21 @@ func BasicAuth(user, pass string) string {
 //GetSitoo - Function to GET data from Sitoo
 func GetSitoo(endpoint string, account string, password string) []byte {
 	accountNo := strings.Split(account, "-")
-	req, err := http.NewRequest("GET", "https://api130.mysitoo.com/v2/accounts/"+accountNo[0]+endpoint, nil)
+
+	var node string
+	if string(accountNo[0][0]) == "9" {
+		node = "-sandbox"
+	} else if string(accountNo[0][0:3]) == "130" {
+		node = "130"
+	} else if string(accountNo[0][0:3]) == "100" {
+		node = ""
+	} else if string(accountNo[0][0:3]) == "201" {
+		node = "201"
+	} else if string(accountNo[0][0:3]) == "202" {
+		node = "202"
+	}
+
+	req, err := http.NewRequest("GET", "https://api"+node+".mysitoo.com/v2/accounts/"+accountNo[0]+endpoint, nil)
 	req.Header.Add("content-type", "application/json")
 	req.Header.Add("Authorization", "Basic "+BasicAuth(account, password))
 	resp, err := http.DefaultClient.Do(req)
@@ -71,7 +85,20 @@ func GetSitoo(endpoint string, account string, password string) []byte {
 //PostSitoo - Function to POST data to Sitoo
 func PostSitoo(endpoint string, account string, password string, json []byte) []byte {
 	accountNo := strings.Split(account, "-")
-	req, err := http.NewRequest("POST", "https://api-sandbox.mysitoo.com/v2/accounts/"+accountNo[0]+endpoint, bytes.NewBuffer(json))
+
+	var node string
+	if string(accountNo[0][0]) == "9" {
+		node = "-sandbox"
+	} else if string(accountNo[0][0:3]) == "130" {
+		node = "130"
+	} else if string(accountNo[0][0:3]) == "100" {
+		node = ""
+	} else if string(accountNo[0][0:3]) == "201" {
+		node = "201"
+	} else if string(accountNo[0][0:3]) == "202" {
+		node = "202"
+	}
+	req, err := http.NewRequest("POST", "https://api"+node+".mysitoo.com/v2/accounts/"+accountNo[0]+endpoint, bytes.NewBuffer(json))
 	req.Header.Add("content-type", "application/json")
 	req.Header.Add("Authorization", "Basic "+BasicAuth(account, password))
 	resp, err := http.DefaultClient.Do(req)
@@ -95,7 +122,20 @@ func PostSitoo(endpoint string, account string, password string, json []byte) []
 //PutSitoo - Function to PUT data to Sitoo
 func PutSitoo(endpoint string, account string, password string, json []byte) []byte {
 	accountNo := strings.Split(account, "-")
-	req, err := http.NewRequest("PUT", "https://api-sandbox.mysitoo.com/v2/accounts/"+accountNo[0]+endpoint, bytes.NewBuffer(json))
+
+	var node string
+	if string(accountNo[0][0]) == "9" {
+		node = "-sandbox"
+	} else if string(accountNo[0][0:3]) == "130" {
+		node = "130"
+	} else if string(accountNo[0][0:3]) == "100" {
+		node = ""
+	} else if string(accountNo[0][0:3]) == "201" {
+		node = "201"
+	} else if string(accountNo[0][0:3]) == "202" {
+		node = "202"
+	}
+	req, err := http.NewRequest("PUT", "https://api"+node+".mysitoo.com/v2/accounts/"+accountNo[0]+endpoint, bytes.NewBuffer(json))
 	req.Header.Add("content-type", "application/json")
 	req.Header.Add("Authorization", "Basic "+BasicAuth(account, password))
 	resp, err := http.DefaultClient.Do(req)
