@@ -49,7 +49,7 @@ func GetSitoo(endpoint string, account string, password string) []byte {
 		"account":     account,
 		"endpoint":    endpoint,
 		"body":        nil,
-	}).Info("Request sent")
+	}).Debug("Request sent")
 
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -80,7 +80,7 @@ func GetSitoo(endpoint string, account string, password string) []byte {
 			"endpoint":    endpoint,
 			"statuscode":  resp.StatusCode,
 			"response":    string(response),
-		}).Info("OK")
+		}).Debug("OK")
 		return response
 	}
 	return response
@@ -175,8 +175,6 @@ func PutSitoo(endpoint string, account string, password string, json []byte) []b
 			"statuscode":  resp.StatusCode,
 			"response":    string(response),
 		}).Fatal("ERROR")
-
-		os.Exit(1)
 	} else {
 		log.WithFields(log.Fields{
 			"requesttype": "PUT/Response",
