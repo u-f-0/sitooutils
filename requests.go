@@ -57,7 +57,7 @@ func GetSitoo(endpoint string, account string, password string) []byte {
 			"account":     account,
 			"endpoint":    endpoint,
 			"body":        nil,
-			"response":    err,
+			"response":    string(err),
 		}).Fatal("ERROR")
 	}
 	defer resp.Body.Close()
@@ -100,7 +100,7 @@ func PostSitoo(endpoint string, account string, password string, json []byte) []
 		"requesttype": "POST",
 		"account":     account,
 		"endpoint":    endpoint,
-		"body":        json,
+		"body":        string(json),
 	}).Info("Request sent")
 
 	if err != nil {
@@ -109,7 +109,7 @@ func PostSitoo(endpoint string, account string, password string, json []byte) []
 			"account":     account,
 			"endpoint":    endpoint,
 			"body":        json,
-			"response":    err,
+			"response":    string(err),
 		}).Fatal("ERROR")
 	}
 	defer resp.Body.Close()
@@ -152,7 +152,7 @@ func PutSitoo(endpoint string, account string, password string, json []byte) []b
 		"requesttype": "PUT",
 		"account":     account,
 		"endpoint":    endpoint,
-		"body":        json,
+		"body":        string(json),
 	}).Info("Request sent")
 
 	if err != nil {
@@ -161,7 +161,7 @@ func PutSitoo(endpoint string, account string, password string, json []byte) []b
 			"account":     account,
 			"endpoint":    endpoint,
 			"body":        json,
-			"response":    err,
+			"response":    string(err),
 		}).Fatal("ERROR")
 	}
 	defer resp.Body.Close()
