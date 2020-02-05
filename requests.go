@@ -30,6 +30,8 @@ func Node(accountNo string) string {
 		node = "201"
 	} else if string(accountNo[0:3]) == "202" {
 		node = "202"
+	} else if string(accountNo[0:3]) == "203" {
+		node = "203"
 	}
 	return node
 }
