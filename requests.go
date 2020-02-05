@@ -51,7 +51,7 @@ func GetSitoo(endpoint string, account string, password string) []byte {
 		"account":     account,
 		"endpoint":    endpoint,
 		"body":        nil,
-	}).Debug("Request sent")
+	}).Info("Request sent")
 
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -82,7 +82,7 @@ func GetSitoo(endpoint string, account string, password string) []byte {
 			"endpoint":    endpoint,
 			"statuscode":  resp.StatusCode,
 			"response":    string(response),
-		}).Debug("OK")
+		}).Info("OK")
 		return response
 	}
 	return response
@@ -103,7 +103,7 @@ func PostSitoo(endpoint string, account string, password string, json []byte) []
 		"account":     account,
 		"endpoint":    endpoint,
 		"body":        string(json),
-	}).Debug("Request sent")
+	}).Info("Request sent")
 
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -134,7 +134,7 @@ func PostSitoo(endpoint string, account string, password string, json []byte) []
 			"endpoint":    endpoint,
 			"statuscode":  resp.StatusCode,
 			"response":    string(response),
-		}).Debug("OK")
+		}).Info("OK")
 		return response
 	}
 	return response
@@ -155,7 +155,7 @@ func PutSitoo(endpoint string, account string, password string, json []byte) []b
 		"account":     account,
 		"endpoint":    endpoint,
 		"body":        string(json),
-	}).Debug("Request sent")
+	}).Info("Request sent")
 
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -184,7 +184,7 @@ func PutSitoo(endpoint string, account string, password string, json []byte) []b
 			"endpoint":    endpoint,
 			"statuscode":  resp.StatusCode,
 			"response":    string(response),
-		}).Debug("OK")
+		}).Info("OK")
 		return response
 	}
 	return response
