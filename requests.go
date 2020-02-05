@@ -60,7 +60,7 @@ func GetSitoo(endpoint string, account string, password string) []byte {
 			"endpoint":    endpoint,
 			"body":        nil,
 			"response":    err,
-		}).Fatal("ERROR")
+		}).Error("ERROR")
 	}
 	defer resp.Body.Close()
 
@@ -72,7 +72,7 @@ func GetSitoo(endpoint string, account string, password string) []byte {
 			"endpoint":    endpoint,
 			"statuscode":  resp.StatusCode,
 			"response":    string(response),
-		}).Fatal("ERROR")
+		}).Error("ERROR")
 
 		os.Exit(1)
 	} else {
@@ -103,7 +103,7 @@ func PostSitoo(endpoint string, account string, password string, json []byte) []
 		"account":     account,
 		"endpoint":    endpoint,
 		"body":        string(json),
-	}).Info("Request sent")
+	}).Debug("Request sent")
 
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -112,7 +112,7 @@ func PostSitoo(endpoint string, account string, password string, json []byte) []
 			"endpoint":    endpoint,
 			"body":        json,
 			"response":    err,
-		}).Fatal("ERROR")
+		}).Error("ERROR")
 	}
 	defer resp.Body.Close()
 
@@ -124,7 +124,7 @@ func PostSitoo(endpoint string, account string, password string, json []byte) []
 			"endpoint":    endpoint,
 			"statuscode":  resp.StatusCode,
 			"response":    string(response),
-		}).Fatal("ERROR")
+		}).Error("ERROR")
 
 		os.Exit(1)
 	} else {
@@ -134,7 +134,7 @@ func PostSitoo(endpoint string, account string, password string, json []byte) []
 			"endpoint":    endpoint,
 			"statuscode":  resp.StatusCode,
 			"response":    string(response),
-		}).Info("OK")
+		}).Debug("OK")
 		return response
 	}
 	return response
@@ -155,7 +155,7 @@ func PutSitoo(endpoint string, account string, password string, json []byte) []b
 		"account":     account,
 		"endpoint":    endpoint,
 		"body":        string(json),
-	}).Info("Request sent")
+	}).Debug("Request sent")
 
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -164,7 +164,7 @@ func PutSitoo(endpoint string, account string, password string, json []byte) []b
 			"endpoint":    endpoint,
 			"body":        json,
 			"response":    err,
-		}).Fatal("ERROR")
+		}).Error("ERROR")
 	}
 	defer resp.Body.Close()
 
@@ -176,7 +176,7 @@ func PutSitoo(endpoint string, account string, password string, json []byte) []b
 			"endpoint":    endpoint,
 			"statuscode":  resp.StatusCode,
 			"response":    string(response),
-		}).Fatal("ERROR")
+		}).Error("ERROR")
 	} else {
 		log.WithFields(log.Fields{
 			"requesttype": "PUT/Response",
@@ -184,7 +184,7 @@ func PutSitoo(endpoint string, account string, password string, json []byte) []b
 			"endpoint":    endpoint,
 			"statuscode":  resp.StatusCode,
 			"response":    string(response),
-		}).Info("OK")
+		}).Debug("OK")
 		return response
 	}
 	return response
