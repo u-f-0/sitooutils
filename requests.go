@@ -81,7 +81,7 @@ func GetSitoo(endpoint string, account string, password string) []byte {
 			"account":     account,
 			"endpoint":    endpoint,
 			"statuscode":  resp.StatusCode,
-			"response":    string(response),
+			"response":    "",
 		}).Info("OK")
 		return response
 	}
