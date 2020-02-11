@@ -18,11 +18,12 @@ func BasicAuth(user, pass string) string {
 	return base64.StdEncoding.EncodeToString([]byte(auth))
 }
 
+//Node - Function to set node
 func Node(accountNo string) string {
 	var node string
 	if string(accountNo[0]) == "9" {
 		node = "-sandbox"
-	} else if string(accountNo[0:3]) == "130" {
+	} else if string(accountNo[0:2]) == "13" {
 		node = "130"
 	} else if string(accountNo[0:3]) == "100" {
 		node = ""
