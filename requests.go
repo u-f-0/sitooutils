@@ -190,3 +190,51 @@ func PutSitoo(endpoint string, account string, password string, json []byte) []b
 	}
 	return response
 }
+
+//DeleteSitoo - Function to DELETE data to Sitoo
+func DeleteSitoo(endpoint string, account string, password string) []byte {
+	accountSplit := strings.Split(account, "-")
+	accountNo := accountSplit[0]
+
+	req, err := http.NewRequest("DELETE", "https://api"+Node(accountNo)+".mysitoo.com/v2/accounts/"+accountNo+endpoint, nil)
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("Authorization", "Basic "+BasicAuth(account, password))
+	resp, err := http.DefaultClient.Do(req)
+
+	log.WithFields(log.Fields{
+		"requesttype": "DELETE",
+		"account":     account,
+		"endpoint":    endpoint,
+	}).Debug("Request sent")
+
+	if err != nil {
+		log.WithFields(log.Fields{
+			"requesttype": "DELETE/Error",
+			"account":     account,
+			"endpoint":    endpoint,
+			"response":    err,
+		}).Error("ERROR")
+	}
+	defer resp.Body.Close()
+
+	response, _ := ioutil.ReadAll(resp.Body)
+	if resp.StatusCode != 200 {
+		log.WithFields(log.Fields{
+			"requesttype": "DELETE/Response",
+			"account":     account,
+			"endpoint":    endpoint,
+			"statuscode":  resp.StatusCode,
+			"response":    string(response),
+		}).Error("ERROR")
+	} else {
+		log.WithFields(log.Fields{
+			"requesttype": "DELETE/Response",
+			"account":     account,
+			"endpoint":    endpoint,
+			"statuscode":  resp.StatusCode,
+			"response":    string(response),
+		}).Debug("OK")
+		return response
+	}
+	return response
+}
