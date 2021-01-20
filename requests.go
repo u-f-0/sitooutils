@@ -66,7 +66,7 @@ func GetSitoo(endpoint string, account string, password string) []byte {
 	defer resp.Body.Close()
 
 	response, _ := ioutil.ReadAll(resp.Body)
-	if resp.StatusCode != 200 {
+	if resp.StatusCode == 500 || resp.StatusCode == 401 {
 		log.WithFields(log.Fields{
 			"requesttype": "GET/Response",
 			"account":     account,
